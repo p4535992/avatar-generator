@@ -25,7 +25,10 @@ public class RandomColorPaintBackgroundLayer implements ILayer {
 
 	@Override
 	public BufferedImage apply(IAvatarInfo avatarInfo, BufferedImage src) {
-		Color backColor = colors.get((int) (avatarInfo.getCode() % colors.size()));
+		int idx = (int) (avatarInfo.getCode() % colors.size());
+		if (idx < 0)
+			idx += colors.size();
+		Color backColor = colors.get(idx);
 
 		int width = src.getWidth();
 		int height = src.getHeight();
