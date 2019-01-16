@@ -121,8 +121,10 @@ public class SmileyAvatar {
 		return Avatar.newBuilder().size(82, 82).elementRegistry(newGhostElementRegistry())
 				.colorizeFunction((avatarInfo, element) -> {
 					if (SmileyElementType.moreShape.name().equals(element)) {
-						Color color = AvatarUtils.defaultColors
-								.get((int) (avatarInfo.getCode() % AvatarUtils.defaultColors.size()));
+						int idx = (int) (avatarInfo.getCode() % AvatarUtils.defaultColors.size());
+						if (idx < 0)
+							idx += AvatarUtils.defaultColors.size();
+						Color color = AvatarUtils.defaultColors.get(idx);
 						return new Color(color.getRed(), color.getGreen(), color.getBlue(), 196);
 					}
 					return null;
