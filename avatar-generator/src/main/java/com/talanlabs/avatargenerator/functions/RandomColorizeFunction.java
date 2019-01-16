@@ -27,7 +27,10 @@ public class RandomColorizeFunction implements Avatar.IColorizeFunction {
 
 	@Override
 	public Color colorize(IAvatarInfo avatarInfo, String element) {
-		Color backColor = colors.get((int) (avatarInfo.getCode() % colors.size()));
+		int idx = (int) (avatarInfo.getCode() % colors.size());
+		if (idx < 0)
+			idx += colors.size();
+		Color backColor = colors.get(idx);
 		return AvatarUtils.getComplementColor(backColor, blackColor, whiteColor);
 	}
 }
